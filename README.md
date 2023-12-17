@@ -53,6 +53,8 @@ After installing necessary python packages, creating migrations and creating adm
     python manage.py runserver
 
 Now, open `localhost:8000` in web browser. 
+
+The security aspects have been implemented in the Settings.py file which is present in the school_app directory
     
 ## Screenshots
 ![Screenshot](https://github.com/Parth971/School-Management-System/blob/main/Screenshots/Image1.png)

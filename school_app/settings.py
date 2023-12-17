@@ -189,4 +189,4 @@ LOGGING = {
         },
     },
 }
-
+CSRF_COOKIE_SECURE = True

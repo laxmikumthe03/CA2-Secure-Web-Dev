@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "apps.students",
     "apps.staffs",
     "apps.result",
+    "axes"
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "apps.corecode.middleware.SiteWideConfigs",
+    "axes.middleware.AxesMiddleware",
+    "corsheaders.middleware.CorsMiddleware"
 ]
 
 ROOT_URLCONF = "school_app.urls"
@@ -145,4 +148,45 @@ SESSION_COOKIE_AGE = 10800
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = "SAMEORIGIN"
+CORS_ALLOWED_ORIGINS = [
+    "127.0.0.1:8000",
+    "*"
+]
+AUTHENTICATION_BACKENDS = [
+   'axes.backends.AxesBackend',
+   'django.contrib.auth.backends.ModelBackend'
+]
+AXES_FAILURE_LIMIT: 6 
+AXES_COOLOFF_TIME: 2 
+AXES_RESET_ON_SUCCESS = True
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'myapp': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
 
